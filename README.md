@@ -76,6 +76,8 @@ The first time that you run your container, a new user `admin` with all privileg
 will be created in MySQL with a random password. To get the password, check the logs
 of the container by running:
 
+Logs
+-----
 
 ```sh
 # with azk
