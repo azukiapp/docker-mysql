@@ -1,0 +1,28 @@
+box: wercker-labs/docker
+build:
+  steps:
+    - script:
+      name: configure Docker
+      code: |
+        docker version
+        #####
+        sudo groupadd docker -f
+        sudo gpasswd -a ${USER} docker
+
+  steps:
+    # build azukiapp/mysql:5.5
+    - docker build -t azukiapp/mysql:5.5 5.5/
+    - script:
+      name: test mysql 5.5
+      code: |
+        - docker run -d -p 13306:3306 -e MYSQL_USER="user" -e MYSQL_PASS="test" azukiapp/mysql:5.5; sleep 30
+        - mysqladmin -uuser -ptest -h127.0.0.1 -P13306 ping | grep -c "mysqld is alive"
+
+  steps:
+    # build azukiapp/mysql:5.6
+    - docker build -t azukiapp/mysql:5.6 5.6/
+    - script:
+      name: test mysql 5.6
+      code: |
+        - docker run -d -p 13306:3306 -e MYSQL_USER="user" -e MYSQL_PASS="test" azukiapp/mysql:5.6; sleep 30
+        - mysqladmin -uuser -ptest -h127.0.0.1 -P13306 ping | grep -c "mysqld is alive"
