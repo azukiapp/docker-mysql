@@ -9,7 +9,7 @@ build:
             name: install mysql-client
             code: |
                 sudo apt-get update
-                sudo apt-get install mysql-client-5.6 -y
+                sudo apt-get install mysql-client-5.5 -y
 
         - script:
             name: build azukiapp/mysql:5.5
