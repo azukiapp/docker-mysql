@@ -1,4 +1,4 @@
-box: gullitmiranda/docker@0.0.1
+box: wercker-labs/docker
 build:
     steps:
         - script:
