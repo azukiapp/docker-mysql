@@ -10,16 +10,15 @@ MySQL versions (tags)
 - [`5,5`](https://github.com/azukiapp/docker-mysql/blob/master/5.5/Dockerfile)
 
 Image content:
+---
 
 - Ubuntu 14.04
 - Git
 - VIM
 - MySQL
 
-Usage
------
+### Usage with `azk`
 
-### with `azk`
 Example of using that image with the [azk](http://azk.io):
 
 ```js
@@ -59,7 +58,8 @@ systems({
 ```
 
 
-### with `docker`
+### Usage with `docker`
+
 To create the image `azukiapp/mysql`, execute the following command on the docker-mysql folder:
 
 ```sh
@@ -77,7 +77,7 @@ will be created in MySQL with a random password. To get the password, check the 
 of the container by running:
 
 Logs
------
+---
 
 ```sh
 # with azk
@@ -89,14 +89,16 @@ $ docker logs <CONTAINER_ID>
 
 You will see an output like the following:
 
-        ========================================================================
-        You can now connect to this MySQL Server using:
+```
+========================================================================
+You can now connect to this MySQL Server using:
 
-            mysql -u azk -p azk -h <host> -P <port>
+    mysql -u azk -p azk -h <host> -P <port>
 
-        Please remember to change the above password as soon as possible!
-        MySQL user 'root' has no password but only allows local connections
-        ========================================================================
+Please remember to change the above password as soon as possible!
+MySQL user 'root' has no password but only allows local connections
+========================================================================
+```
 
 In this case, `azk` is the password allocated to the `azk` user.
 
