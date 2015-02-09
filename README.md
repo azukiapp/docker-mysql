@@ -129,7 +129,7 @@ $ mysqldump --host <host> --port <port> --user <user> --password --quick --singl
 
 To import a SQL backup which is stored for example in the project root, run the following:
 
-```
+```sh
 $ azk shell mysql
 $ /import_sql.sh <user> <pass> <dump.sql>
 ```
