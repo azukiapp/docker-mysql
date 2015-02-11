@@ -6,8 +6,8 @@ Base docker image to run a MySQL database server in [`azk`](http://azk.io)
 MySQL versions (tags)
 ---
 
-- [`5,6`, `5`, `latest`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
-- [`5,5`](https://github.com/azukiapp/docker-mysql/blob/master/5.5/Dockerfile)
+- [`latest`, `5.6`, `5`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
+- [`5.5`](https://github.com/azukiapp/docker-mysql/blob/master/5.5/Dockerfile)
 
 Image content:
 ---
@@ -30,7 +30,7 @@ Example of using that image with the [azk](http://azk.io):
 systems({
   mysql: {
     // Dependent systems
-    depends: [],
+    depends: [], // postgres, mysql, mongodb ...
     // More images:  http://images.azk.io
     image: {"docker": "azukiapp/mysql"},
     shell: "/bin/bash",
