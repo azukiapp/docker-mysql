@@ -19,7 +19,7 @@ Image content:
 
 ### Usage with `azk`
 
-Example of using that image with the [azk](http://azk.io):
+Example of using this image with [azk](http://azk.io):
 
 ```js
 /**
@@ -111,7 +111,7 @@ Environment variables
 
 `MYSQL_PASS`: Set a specific password for the admin account. (default 'azk')
 
-`STARTUP_SQL`: Defines one or more sql scripts separated by spaces to initialize the database. Note that the scripts must be inside the conainer so you may need to mount them
+`STARTUP_SQL`: Defines one or more sql scripts separated by spaces to initialize the database. Note that the scripts must be inside the container, so you may need to mount them
 
 
 Migrating an existing MySQL Server
@@ -129,7 +129,7 @@ $ mysqldump --host <host> --port <port> --user <user> --password --opt -d -B <da
 $ mysqldump --host <host> --port <port> --user <user> --password --quick --single-transaction -t -n -B <database name(s)> > dbserver_data.sql
 ```
 
-To import a SQL backup which is stored for example in the project root, run the following:
+To import a SQL backup which is stored, for example, in the project root, run the following:
 
 ```sh
 $ azk shell mysql
