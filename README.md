@@ -6,8 +6,10 @@ Base docker image to run a MySQL database server in [`azk`](http://azk.io)
 MySQL versions (tags)
 ---
 
+<versions>
 - [`latest`, `5.6`, `5`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
 - [`5.5`](https://github.com/azukiapp/docker-mysql/blob/master/5.5/Dockerfile)
+</versions>
 
 Image content:
 ---
