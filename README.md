@@ -31,10 +31,11 @@ Example of using this image with [azk](http://azk.io):
 // Adds the systems that shape your system
 systems({
   mysql: {
-    // Dependent systems
-    depends: [], // postgres, mysql, mongodb ...
     // More images:  http://images.azk.io
     image: {"docker": "azukiapp/mysql"},
+    provision: [
+      // 'rm -rf /var/lib/mysql', // clean mysql data
+    ];
     shell: "/bin/bash",
     wait: {"retry": 25, "timeout": 1000},
     mounts: {
@@ -140,4 +141,7 @@ $ /import_sql.sh <user> <pass> <dump.sql>
 
 ## License
 
-Azuki Dockerfiles distributed under the [Apache License](https://github.com/azukiapp/dockerfiles/blob/master/LICENSE).
+Azuki Dockerfiles distributed under the [Apache License][license].
+
+[license]: ./LICENSE
+
