@@ -35,7 +35,7 @@ systems({
     image: {"docker": "azukiapp/mysql"},
     provision: [
       // 'rm -rf /var/lib/mysql', // clean mysql data
-    ];
+    ],
     shell: "/bin/bash",
     wait: {"retry": 25, "timeout": 1000},
     mounts: {
@@ -75,7 +75,7 @@ To run the image and bind to port 3306:
 $ docker run -d -p 3306:3306 azukiapp/mysql
 ```
 
-The first time that you run your container, a new user `admin` with all privileges 
+The first time that you run your container, a new user `admin` with all privileges
 will be created in MySQL with a random password. To get the password, check the logs
 of the container by running:
 
