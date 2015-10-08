@@ -7,7 +7,8 @@ MySQL versions (tags)
 ---
 
 <versions>
-- [`latest`, `5.7`, `5.6`, `5`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
+- [`5.7`](https://github.com/azukiapp/docker-mysql/blob/master/5.7/Dockerfile)
+- [`latest`, `5.6`, `5`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
 - [`5.5`](https://github.com/azukiapp/docker-mysql/blob/master/5.5/Dockerfile)
 </versions>
 
