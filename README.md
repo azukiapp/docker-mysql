@@ -7,8 +7,8 @@ MySQL versions (tags)
 ---
 
 <versions>
-- [`5.7`](https://github.com/azukiapp/docker-mysql/blob/master/5.7/Dockerfile)
-- [`latest`, `5.6`, `5`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
+- [`latest`,  `5.7`, `5`](https://github.com/azukiapp/docker-mysql/blob/master/5.7/Dockerfile)
+- [`5.6`](https://github.com/azukiapp/docker-mysql/blob/master/5.6/Dockerfile)
 - [`5.5`](https://github.com/azukiapp/docker-mysql/blob/master/5.5/Dockerfile)
 </versions>
 
@@ -89,7 +89,7 @@ $ docker build -t azukiapp/mysql:5.7 5.7/
 To run the image and bind to port 3306:
 
 ```sh
-$ docker run -d -p 3306:3306 azukiapp/mysql:5.7
+$ docker run --name mysql-server -d -p 3306:3306 azukiapp/mysql:5.7
 ```
 
 The first time that you run your container, a new user `admin` with all privileges
@@ -104,7 +104,7 @@ Logs
 $ azk logs mysql
 
 # with docker
-$ docker logs <CONTAINER_ID>
+$ docker logs mysql-server
 ```
 
 You will see an output like the following:
