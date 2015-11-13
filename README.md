@@ -26,48 +26,70 @@ Example of using this image with [azk](http://azk.io):
 // Adds the systems that shape your system
 systems({
   mysql: {
-    // More images:  http://images.azk.io
-    image: {"docker": "azukiapp/mysql"},
-    provision: [
-      // 'rm -rf /var/lib/mysql', // clean mysql data
-    ],
+    // More info about mysql image: http://images.azk.io/#/mysql?from=azkfile-mysql-images
+    image: {"docker": "azukiapp/mysql:5.7"},
     shell: "/bin/bash",
-    wait: {"retry": 25, "timeout": 1000},
+    wait: 25,
     mounts: {
-      '/var/lib/mysql': persistent("mysql_lib#{system.name}"),
+      '/var/lib/mysql': persistent("mysql_data"),
+      // to clean mysql data, run:
+      // $ azk shell mysql -- rm -rf /var/lib/mysql/*
     },
     ports: {
-      // exports global variables
+      // exports global variables: "#{net.port.data}"
       data: "3306/tcp",
     },
     envs: {
       // set instances variables
       MYSQL_USER         : "azk",
       MYSQL_PASS         : "azk",
-      MYSQL_DATABASE     : "#{system.name}_development",
+      MYSQL_DATABASE     : "#{manifest.dir}_development",
+      MYSQL_ROOT_PASSWORD: "azk",
     },
     export_envs: {
       // check this gist to configure your database
       // https://gist.github.com/gullitmiranda/62082f2e47c364ef9617
-      DATABASE_URL: "mysql2://#{envs.MYSQL_USER}:#{envs.MYSQL_PASS}@#{net.host}:#{net.port.data}/${envs.MYSQL_DATABASE}",
+      DATABASE_URL: "mysql2://#{envs.MYSQL_USER}:#{envs.MYSQL_PASS}@#{net.host}:#{net.port.data}/#{envs.MYSQL_DATABASE}",
+      // or use splited envs:
+      // MYSQL_USER    : "#{envs.MYSQL_USER}",
+      // MYSQL_PASS    : "#{envs.MYSQL_PASS}",
+      // MYSQL_HOST    : "#{net.host}",
+      // MYSQL_PORT    : "#{net.port.data}",
+      // MYSQL_DATABASE: "#{envs.MYSQL_DATABASE}"
     },
   },
 });
 ```
 
+###### NOTE:
+
+Do not forget to add `mysql` as a dependency of your application:
+
+e.g.:
+
+```js
+systems({
+  'my-app': {
+    // Dependent systems
+    depends: ["mysql"],
+    /* ... */
+  },
+  'mysql': { /* ... */ }
+})
+```
 
 ### Usage with `docker`
 
 To create the image `azukiapp/mysql`, execute the following command on the docker-mysql folder:
 
 ```sh
-$ docker build -t azukiapp/mysql 5.6/
+$ docker build -t azukiapp/mysql:5.7 5.7/
 ```
 
 To run the image and bind to port 3306:
 
 ```sh
-$ docker run -d -p 3306:3306 azukiapp/mysql
+$ docker run -d -p 3306:3306 azukiapp/mysql:5.7
 ```
 
 The first time that you run your container, a new user `admin` with all privileges
