@@ -33,7 +33,7 @@ systems({
     mounts: {
       '/var/lib/mysql': persistent("mysql_data"),
       // to clean mysql data, run:
-      // $ azk shell mysql -- rm -rf /var/lib/mysql/*
+      // $ azk shell mysql -c "rm -rf /var/lib/mysql/*"
     },
     ports: {
       // exports global variables: "#{net.port.data}"
