@@ -107,53 +107,50 @@ $ azk logs mysql
 $ docker logs mysql-server
 ```
 
-You will see an output like the following:
-
-```
-========================================================================
-You can now connect to this MySQL Server using:
-
-    mysql -u azk -p azk -h <host> -P <port>
-
-Please remember to change the above password as soon as possible!
-MySQL user 'root' has no password but only allows local connections
-========================================================================
-```
-
-In this case, `azk` is the password allocated to the `azk` user.
-
-Remember that the `root` user has no password but it's only accessible from within the container.
-
-Environment variables
----------------------
-
-`MYSQL_USER`: Set a specific username for the admin account. (default 'azk')
-
-`MYSQL_PASS`: Set a specific password for the admin account. (default 'azk')
-
-`STARTUP_SQL`: Defines one or more sql scripts separated by spaces to initialize the database. Note that the scripts must be inside the container, so you may need to mount them
-
-
 Migrating an existing MySQL Server
 ----------------------------------
 
 In order to migrate your current MySQL server, perform the following commands from your current server:
 
+### Remote MySQL server
+
 ```sh
 $ azk shell mysql
 
-### Dump databases structure:
-$ mysqldump --host <host> --port <port> --user <user> --password --opt -d -B <database name(s)> > dbserver_schema.sql
+# Dump:
 
-### Dump database data:
-$ mysqldump --host <host> --port <port> --user <user> --password --quick --single-transaction -t -n -B <database name(s)> > dbserver_data.sql
+## databases structure:
+$ mysqldump --host <host> --port <port> --user <user> --password -B <database name(s)> --opt -d > dbserver_schema.sql
+## database data:
+$ mysqldump --host <host> --port <port> --user <user> --password -B <database name(s)> --quick --single-transaction -t -n > dbserver_data.sql
+
+# Import:
+## databases structure:
+$ mysql --host <host> --port <port> --user <user> --password < dbserver_schema.sql
+## databases data:
+$ mysql --host <host> --port <port> --user <user> --password < dbserver_data.sql
 ```
 
-To import a SQL backup which is stored, for example, in the project root, run the following:
+### Local MySQL system
 
 ```sh
-$ azk shell mysql
-$ /import_sql.sh <user> <pass> <dump.sql>
+$ azk shell mysql_old
+
+# Dump:
+
+## databases structure:
+$ mysqldump -uroot -p"${MYSQL_ROOT_PASSWORD}" -B ${MYSQL_DATABASE} --opt -d > dbserver_schema.sql
+## databases data:
+$ mysqldump -uroot -p"${MYSQL_ROOT_PASSWORD}" -B ${MYSQL_DATABASE} --quick --single-transaction -t -n > dbserver_data.sql
+
+# Import:
+$ azk shell mysql_new
+## start mysql service
+$ mysqld_safe &
+## databases structure:
+$ mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" < dbserver_schema.sql
+## databases data:
+$ mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" < dbserver_data.sql
 ```
 
 ## License
@@ -161,4 +158,3 @@ $ /import_sql.sh <user> <pass> <dump.sql>
 Azuki Dockerfiles distributed under the [Apache License][license].
 
 [license]: ./LICENSE
-
