@@ -42,17 +42,17 @@ systems({
     envs: {
       // set instances variables
       MYSQL_USER         : "azk",
-      MYSQL_PASS         : "azk",
+      MYSQL_PASSWORD     : "azk",
       MYSQL_DATABASE     : "#{manifest.dir}_development",
       MYSQL_ROOT_PASSWORD: "azk",
     },
     export_envs: {
       // check this gist to configure your database
       // https://gist.github.com/gullitmiranda/62082f2e47c364ef9617
-      DATABASE_URL: "mysql2://#{envs.MYSQL_USER}:#{envs.MYSQL_PASS}@#{net.host}:#{net.port.data}/#{envs.MYSQL_DATABASE}",
+      DATABASE_URL: "mysql2://#{envs.MYSQL_USER}:#{envs.MYSQL_PASSWORD}@#{net.host}:#{net.port.data}/#{envs.MYSQL_DATABASE}",
       // or use splited envs:
       // MYSQL_USER    : "#{envs.MYSQL_USER}",
-      // MYSQL_PASS    : "#{envs.MYSQL_PASS}",
+      // MYSQL_PASSWORD: "#{envs.MYSQL_PASSWORD}",
       // MYSQL_HOST    : "#{net.host}",
       // MYSQL_PORT    : "#{net.port.data}",
       // MYSQL_DATABASE: "#{envs.MYSQL_DATABASE}"
